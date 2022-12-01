@@ -1,16 +1,60 @@
+:root{
+  --container:400px;
+}
+
 .App {
   font-family: sans-serif;
   text-align: center;
 }
-.drum-machine{
-  padding:auto;
-  width:100%;
+body{
+  /* background-color: black; */
+  /* background-image: url("https://thumbs.dreamstime.com/b/modelo-de-mosaico-geom%C3%A9trico-del-tri%C3%A1ngulo-azul-35955837.jpg"); */
+  /* background-image: url("https://www.designbolts.com/wp-content/uploads/2014/04/ultra-violet-purple-seamless-background.png"); */
+}
+#drum-machine{
+  display: block;
+  width:var(--container) !important;
+  margin:auto !important;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: white;
+  opacity: .8;
+}
+.divs{
+  width:var(--container) !important;
+  text-align: center;
 }
 div.drum-pad button{
   width:40px;
   height:40px;
+  opacity: 1;
 }
 
 div.drum-pad{
   margin:5px;
+  width:90px;
+}
+.table {
+  display:block; 
+  width:var(--container) !important;
+}
+.row { 
+  text-align: center;
+  display:block;
+  width:var(--container) !important;
+}
+.cell {
+  display:inline-block;
+  text-align: center;
+}
+.pause{
+  width:120px !important;
+}
+.select_theme{
+  width:100px;
+}
+p{
+  margin-bottom: 3px;
 }
