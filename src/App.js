@@ -31,7 +31,8 @@ const defaultThemeTag =[
   "Closed HH",
   "Punchy Kick",
   "Side Stick",
-  "Snare"
+  "Snare",
+  "Pause"
 ]
 
 const WhoWantsToBeList = [
@@ -55,7 +56,8 @@ const WhoWantsTag = [
   "Phone a Friend",
   "Suspense",
   "WIN",
-  "Yey Kids"
+  "Yey Kids",
+  "Pause"
 ]
 
 var defaultTag =[]
@@ -118,7 +120,7 @@ export default class App extends React.Component {
       var div1 = document.getElementById(KeyId);
       var Btn_Pressed = div1.getElementsByTagName("button")[0];
       var div = document.getElementById('display');
-      div.innerHTML = Btn_Pressed.value;
+      div.innerHTML = defaultTag[parseInt(Btn_Pressed.value)];
     }
     catch(e){
       div.innerHTML = event.target.value;
@@ -167,7 +169,7 @@ export default class App extends React.Component {
           <button
             type="button"
             name={this.state.keyList[0]}
-            value="Chord 1"
+            value="0"
             onClick={this.handleClick}
           >
             Q
@@ -183,7 +185,7 @@ export default class App extends React.Component {
           <button
             type="button"
             name={this.state.keyList[1]}
-            value="Chord 2"
+            value="1"
             onClick={this.handleClick}
           >
             W
@@ -199,7 +201,7 @@ export default class App extends React.Component {
           <button
             type="button"
             name={this.state.keyList[2]}
-            value="Chord 3"
+            value="2"
             onClick={this.handleClick}
           >
             E
@@ -215,7 +217,7 @@ export default class App extends React.Component {
           <button
             type="button"
             name={this.state.keyList[3]}
-            value="Shaker"
+            value="3"
             onClick={this.handleClick}
           >
             A
@@ -231,7 +233,7 @@ export default class App extends React.Component {
           <button
             type="button"
             name={this.state.keyList[4]}
-            value="Open HH"
+            value="4"
             onClick={this.handleClick}
           >
             S
@@ -247,7 +249,7 @@ export default class App extends React.Component {
           <button
             type="button"
             name={this.state.keyList[5]}
-            value="Closed HH"
+            value="5"
             onClick={this.handleClick}
           >
             D
@@ -263,7 +265,7 @@ export default class App extends React.Component {
           <button
             type="button"
             name={this.state.keyList[6]}
-            value="Punchy Kick"
+            value="6"
             onClick={this.handleClick}
           >
             Z
@@ -279,7 +281,7 @@ export default class App extends React.Component {
           <button
             type="button"
             name={this.state.keyList[7]}
-            value="Side Stick"
+            value="7"
             onClick={this.handleClick}
           >
             X
@@ -295,7 +297,7 @@ export default class App extends React.Component {
           <button
             type="button"
             name={this.state.keyList[8]}
-            value="Snare"
+            value="8"
             onClick={this.handleClick}
           >
             C
@@ -312,7 +314,7 @@ export default class App extends React.Component {
           <button
             type="button"
             name={this.state.keyList[9]}
-            value="Pause"
+            value="9"
             onClick={this.handleClick}
           >
             P
