@@ -9,16 +9,70 @@ import Supense from  "./WhoWantsToBe/Suspense.mp3"
 import Win from "./WhoWantsToBe/Win.mp3"
 import Yey from "./WhoWantsToBe/Yey.mp3"
 import React, { Suspense } from "react";
+var playing = 0;
+const defaultAudio = [
+  "https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3",
+  "https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3",
+  "https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3",
+  "https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3",
+  "https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3",
+  "https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3",
+  "https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3",
+  "https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3",
+  "https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3"
+];
+
+const defaultThemeTag =[
+  "Chord 1",
+  "Chord 2",
+  "Chord 3",
+  "Shaker",
+  "Open HH",
+  "Closed HH",
+  "Punchy Kick",
+  "Side Stick",
+  "Snare"
+]
+
+const WhoWantsToBeList = [
+  Win1000,
+  BackGroundMusic,
+  FinalAns,
+  LetsPlay,
+  Lose,
+  Phone,
+  Supense,
+  Win,
+  Yey
+]
+
+const WhoWantsTag = [
+  "WIN",
+  "Background Music",
+  "Final Answer",
+  "Let's Play",
+  "Lose",
+  "Phone a Friend",
+  "Suspense",
+  "WIN",
+  "Yey Kids"
+]
+
+var defaultTag =[]
+var audioOut = [];
 
 export default class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       displayValue: "",
       keyPressed: "",
-      keyList: ["Q", "W", "E", "A", "S", "D", "Z", "X", "C", "P"]
+      keyList: ["Q", "W", "E", "A", "S", "D", "Z", "X", "C", "P"],
+      theme: "default"
     };
     this.handleClick = this.handleClick.bind(this);
+    this.changeTheme = this.changeTheme.bind(this);
+    this.changeVolume = this.changeVolume.bind(this);
   }
 
   componentDidMount() {
@@ -35,17 +89,18 @@ export default class App extends React.Component {
   }
 
   handleClick(event) {
-    console.log(arguments);
-
+    console.log(event.target)
     if (arguments[0] === "keydown") {
       var audio = document.getElementById(arguments[1]);
     } else {
+      this.setState({ keyPressed: "" });
       const { name, value } = event.target;
       this.setState({
         displayValue: value
       });
       var audio = document.getElementById(name);
     }
+    audio.volume = document.getElementById("mixerVolume").value/100;
     audio.paused ? audio.play() : (audio.currentTime = 0);
 
     if(arguments[1]=="P"){
@@ -56,38 +111,57 @@ export default class App extends React.Component {
         el.currentTime = 0;
       });
     }
+
+    var div = document.getElementById('display');
+    try{
+      var KeyId = "pad-" + arguments[1].toLowerCase();
+      var div1 = document.getElementById(KeyId);
+      var Btn_Pressed = div1.getElementsByTagName("button")[0];
+      var div = document.getElementById('display');
+      div.innerHTML = Btn_Pressed.value;
+    }
+    catch(e){
+      div.innerHTML = event.target.value;
+    }
+    
+  }
+  changeTheme(){
+    this.setState({
+      theme: document.getElementById("Theme_select").value
+    });
+  }
+  changeVolume(){
+    const elements = document.querySelectorAll('audio');
+
+    elements.forEach( el => {
+      el.volume = document.getElementById("mixerVolume").value/100;
+    });
   }
 
   render() {
-    const defaultAudio = [
-      "https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3",
-      "https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3",
-      "https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3",
-      "https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3",
-      "https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3",
-      "https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3",
-      "https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3",
-      "https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3",
-      "https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3"
-    ];
-
-    const WhoWantsToBeList = [
-      Win1000,
-      BackGroundMusic,
-      FinalAns,
-      LetsPlay,
-      Lose,
-      Phone,
-      Supense,
-      Win,
-      Yey
-    ]
-
-    const audioOut = WhoWantsToBeList;
+    
+    if(this.state.theme=="default") {
+      defaultTag=defaultThemeTag;
+      audioOut=defaultAudio;
+    }
+    else if(this.state.theme=="WhoWants") {
+      audioOut=WhoWantsToBeList;
+      defaultTag=WhoWantsTag
+    }
 
     return (
       <div id="drum-machine">
-        <div id="display">{this.state.displayValue}</div>
+        <div id="display">{defaultTag[playing]}</div>
+
+        <div id="select">
+          <select name="Theme" id="Theme_select" onChange={this.changeTheme}>
+            <option value="default">Default</option>
+            <option value="WhoWants">Who wants to be a millionaire</option>
+          </select>
+        </div>
+        <div>
+          <input type="range" min="0" max="100" className="slider" id="mixerVolume" onChange={this.changeVolume}></input>
+        </div>
 
         <div className="drum-pad" id="pad-q">
           <button
@@ -238,7 +312,7 @@ export default class App extends React.Component {
           <button
             type="button"
             name={this.state.keyList[9]}
-            value="Snare"
+            value="Pause"
             onClick={this.handleClick}
           >
             P
