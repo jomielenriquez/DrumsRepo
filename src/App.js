@@ -16,7 +16,7 @@ export default class App extends React.Component {
     this.state = {
       displayValue: "",
       keyPressed: "",
-      keyList: ["Q", "W", "E", "A", "S", "D", "Z", "X", "C"]
+      keyList: ["Q", "W", "E", "A", "S", "D", "Z", "X", "C", "P"]
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -35,6 +35,8 @@ export default class App extends React.Component {
   }
 
   handleClick(event) {
+    console.log(arguments);
+
     if (arguments[0] === "keydown") {
       var audio = document.getElementById(arguments[1]);
     } else {
@@ -45,6 +47,15 @@ export default class App extends React.Component {
       var audio = document.getElementById(name);
     }
     audio.paused ? audio.play() : (audio.currentTime = 0);
+
+    if(arguments[1]=="P"){
+      const elements = document.querySelectorAll('audio');
+
+      elements.forEach( el => {
+        el.pause();
+        el.currentTime = 0;
+      });
+    }
   }
 
   render() {
@@ -67,7 +78,7 @@ export default class App extends React.Component {
       LetsPlay,
       Lose,
       Phone,
-      Suspense,
+      Supense,
       Win,
       Yey
     ]
@@ -218,6 +229,23 @@ export default class App extends React.Component {
           <audio
             className="clip"
             id={this.state.keyList[8]}
+            src={audioOut[8]}
+            // src={OpenHH}
+          />
+        </div>
+
+        <div className="drum-pad" id="pad-p">
+          <button
+            type="button"
+            name={this.state.keyList[9]}
+            value="Snare"
+            onClick={this.handleClick}
+          >
+            P
+          </button>
+          <audio
+            className="clip"
+            id={this.state.keyList[9]}
             src={audioOut[8]}
             // src={OpenHH}
           />
