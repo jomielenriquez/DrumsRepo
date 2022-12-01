@@ -1,6 +1,14 @@
 import "./styles.css";
-import OpenHH from "./sound/OpenHH.mp3";
-import React from "react";
+import BackGroundMusic from "./WhoWantsToBe/BackGroundMusic.mp3"
+import Win1000 from "./WhoWantsToBe/$1,000 Win.mp3"
+import FinalAns from "./WhoWantsToBe/FinalAns.mp3"
+import LetsPlay from "./WhoWantsToBe/LetsPlay.mp3"
+import Lose from "./WhoWantsToBe/Lose.mp3"
+import Phone from "./WhoWantsToBe/PhoneAFriend.mp3"
+import Supense from  "./WhoWantsToBe/Suspense.mp3"
+import Win from "./WhoWantsToBe/Win.mp3"
+import Yey from "./WhoWantsToBe/Yey.mp3"
+import React, { Suspense } from "react";
 
 export default class App extends React.Component {
   constructor() {
@@ -52,7 +60,19 @@ export default class App extends React.Component {
       "https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3"
     ];
 
-    const audioOut = defaultAudio;
+    const WhoWantsToBeList = [
+      Win1000,
+      BackGroundMusic,
+      FinalAns,
+      LetsPlay,
+      Lose,
+      Phone,
+      Suspense,
+      Win,
+      Yey
+    ]
+
+    const audioOut = WhoWantsToBeList;
 
     return (
       <div id="drum-machine">
