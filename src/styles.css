@@ -2,3 +2,15 @@
   font-family: sans-serif;
   text-align: center;
 }
+.drum-machine{
+  padding:auto;
+  width:100%;
+}
+div.drum-pad button{
+  width:40px;
+  height:40px;
+}
+
+div.drum-pad{
+  margin:5px;
+}
