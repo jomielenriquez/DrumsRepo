@@ -105,14 +105,17 @@ export default class App extends React.Component {
     audio.volume = document.getElementById("mixerVolume").value/100;
     audio.paused ? audio.play() : (audio.currentTime = 0);
 
-    if(arguments[1]=="P"){
-      const elements = document.querySelectorAll('audio');
-
-      elements.forEach( el => {
-        el.pause();
-        el.currentTime = 0;
-      });
+    try{
+      if(arguments[1]=="P" || event.target.value=="9"){
+        const elements = document.querySelectorAll('audio');
+  
+        elements.forEach( el => {
+          el.pause();
+          el.currentTime = 0;
+        });
+      }
     }
+    catch(e){}
 
     var div = document.getElementById('display');
     try{
@@ -145,186 +148,207 @@ export default class App extends React.Component {
     if(this.state.theme=="default") {
       defaultTag=defaultThemeTag;
       audioOut=defaultAudio;
+      document.body.style.backgroundImage='url("https://thumbs.dreamstime.com/b/modelo-de-mosaico-geom%C3%A9trico-del-tri%C3%A1ngulo-azul-35955837.jpg")';
     }
     else if(this.state.theme=="WhoWants") {
       audioOut=WhoWantsToBeList;
       defaultTag=WhoWantsTag
+      document.body.style.backgroundImage='url("https://www.designbolts.com/wp-content/uploads/2014/04/ultra-violet-purple-seamless-background.png")';
     }
 
     return (
       <div id="drum-machine">
-        <div id="display">{defaultTag[playing]}</div>
+        <div id="display" className="divs">{defaultTag[playing]}</div>
 
-        <div id="select">
-          <select name="Theme" id="Theme_select" onChange={this.changeTheme}>
+        <div id="select" className="divs">
+          <select name="Theme" id="Theme_select" className="select_theme" onChange={this.changeTheme}>
             <option value="default">Default</option>
             <option value="WhoWants">Who wants to be a millionaire</option>
           </select>
         </div>
-        <div>
-          <input type="range" min="0" max="100" className="slider" id="mixerVolume" onChange={this.changeVolume}></input>
+        <div id="div_volume" className="divs">
+          <input type="range" min="0" max="100" className="Volume" id="mixerVolume" onChange={this.changeVolume}></input>
         </div>
 
-        <div className="drum-pad" id="pad-q">
-          <button
-            type="button"
-            name={this.state.keyList[0]}
-            value="0"
-            onClick={this.handleClick}
-          >
-            Q
-          </button>
-          <audio
-            className="clip"
-            id={this.state.keyList[0]}
-            src={audioOut[0]}
-          />
-        </div>
+        <div className="buttons table">
+          <div className="row">
+            <div className="drum-pad cell" id="pad-q">
+              <p>{defaultTag[0]}</p>
+              <button
+                type="button"
+                name={this.state.keyList[0]}
+                value="0"
+                onClick={this.handleClick}
+              >
+                Q
+              </button>
+              <audio
+                className="clip"
+                id={this.state.keyList[0]}
+                src={audioOut[0]}
+              />
+            </div>
 
-        <div className="drum-pad" id="pad-w">
-          <button
-            type="button"
-            name={this.state.keyList[1]}
-            value="1"
-            onClick={this.handleClick}
-          >
-            W
-          </button>
-          <audio
-            className="clip"
-            id={this.state.keyList[1]}
-            src={audioOut[1]}
-          />
-        </div>
+            <div className="drum-pad cell" id="pad-w">
+              <p>{defaultTag[1]}</p>
+              <button
+                type="button"
+                name={this.state.keyList[1]}
+                value="1"
+                onClick={this.handleClick}
+              >
+                W
+              </button>
+              <audio
+                className="clip"
+                id={this.state.keyList[1]}
+                src={audioOut[1]}
+              />
+            </div>
 
-        <div className="drum-pad" id="pad-e">
-          <button
-            type="button"
-            name={this.state.keyList[2]}
-            value="2"
-            onClick={this.handleClick}
-          >
-            E
-          </button>
-          <audio
-            className="clip"
-            id={this.state.keyList[2]}
-            src={audioOut[2]}
-          />
-        </div>
+            <div className="drum-pad cell" id="pad-e">
+              <p>{defaultTag[2]}</p>
+              <button
+                type="button"
+                name={this.state.keyList[2]}
+                value="2"
+                onClick={this.handleClick}
+              >
+                E
+              </button>
+              <audio
+                className="clip"
+                id={this.state.keyList[2]}
+                src={audioOut[2]}
+              />
+            </div>
+          </div>
 
-        <div className="drum-pad" id="pad-a">
-          <button
-            type="button"
-            name={this.state.keyList[3]}
-            value="3"
-            onClick={this.handleClick}
-          >
-            A
-          </button>
-          <audio
-            className="clip"
-            id={this.state.keyList[3]}
-            src={audioOut[3]}
-          />
-        </div>
+          <div className="row">
+            <div className="drum-pad cell" id="pad-a">
+              <p>{defaultTag[3]}</p>
+              <button
+                type="button"
+                name={this.state.keyList[3]}
+                value="3"
+                onClick={this.handleClick}
+              >
+                A
+              </button>
+              <audio
+                className="clip"
+                id={this.state.keyList[3]}
+                src={audioOut[3]}
+              />
+            </div>
 
-        <div className="drum-pad" id="pad-s">
-          <button
-            type="button"
-            name={this.state.keyList[4]}
-            value="4"
-            onClick={this.handleClick}
-          >
-            S
-          </button>
-          <audio
-            className="clip"
-            id={this.state.keyList[4]}
-            src={audioOut[4]}
-          />
-        </div>
+            <div className="drum-pad cell" id="pad-s">
+              <p>{defaultTag[4]}</p>
+              <button
+                type="button"
+                name={this.state.keyList[4]}
+                value="4"
+                onClick={this.handleClick}
+              >
+                S
+              </button>
+              <audio
+                className="clip"
+                id={this.state.keyList[4]}
+                src={audioOut[4]}
+              />
+            </div>
 
-        <div className="drum-pad" id="pad-d">
-          <button
-            type="button"
-            name={this.state.keyList[5]}
-            value="5"
-            onClick={this.handleClick}
-          >
-            D
-          </button>
-          <audio
-            className="clip"
-            id={this.state.keyList[5]}
-            src={audioOut[5]}
-          />
-        </div>
+            <div className="drum-pad cell" id="pad-d">
+              <p>{defaultTag[5]}</p>
+              <button
+                type="button"
+                name={this.state.keyList[5]}
+                value="5"
+                onClick={this.handleClick}
+              >
+                D
+              </button>
+              <audio
+                className="clip"
+                id={this.state.keyList[5]}
+                src={audioOut[5]}
+              />
+            </div>
+          </div>
 
-        <div className="drum-pad" id="pad-z">
-          <button
-            type="button"
-            name={this.state.keyList[6]}
-            value="6"
-            onClick={this.handleClick}
-          >
-            Z
-          </button>
-          <audio
-            className="clip"
-            id={this.state.keyList[6]}
-            src={audioOut[6]}
-          />
-        </div>
+          <div className="row">
+            <div className="drum-pad cell" id="pad-z">
+              <p>{defaultTag[6]}</p>
+              <button
+                type="button"
+                name={this.state.keyList[6]}
+                value="6"
+                onClick={this.handleClick}
+              >
+                Z
+              </button>
+              <audio
+                className="clip"
+                id={this.state.keyList[6]}
+                src={audioOut[6]}
+              />
+            </div>
 
-        <div className="drum-pad" id="pad-x">
-          <button
-            type="button"
-            name={this.state.keyList[7]}
-            value="7"
-            onClick={this.handleClick}
-          >
-            X
-          </button>
-          <audio
-            className="clip"
-            id={this.state.keyList[7]}
-            src={audioOut[7]}
-          />
-        </div>
+            <div className="drum-pad cell" id="pad-x">
+              <p>{defaultTag[7]}</p>
+              <button
+                type="button"
+                name={this.state.keyList[7]}
+                value="7"
+                onClick={this.handleClick}
+              >
+                X
+              </button>
+              <audio
+                className="clip"
+                id={this.state.keyList[7]}
+                src={audioOut[7]}
+              />
+            </div>
 
-        <div className="drum-pad" id="pad-c">
-          <button
-            type="button"
-            name={this.state.keyList[8]}
-            value="8"
-            onClick={this.handleClick}
-          >
-            C
-          </button>
-          <audio
-            className="clip"
-            id={this.state.keyList[8]}
-            src={audioOut[8]}
-            // src={OpenHH}
-          />
-        </div>
-
-        <div className="drum-pad" id="pad-p">
-          <button
-            type="button"
-            name={this.state.keyList[9]}
-            value="9"
-            onClick={this.handleClick}
-          >
-            P
-          </button>
-          <audio
-            className="clip"
-            id={this.state.keyList[9]}
-            src={audioOut[8]}
-            // src={OpenHH}
-          />
+            <div className="drum-pad cell" id="pad-c">
+              <p>{defaultTag[8]}</p>
+              <button
+                type="button"
+                name={this.state.keyList[8]}
+                value="8"
+                onClick={this.handleClick}
+              >
+                C
+              </button>
+              <audio
+                className="clip"
+                id={this.state.keyList[8]}
+                src={audioOut[8]}
+                // src={OpenHH}
+              />
+            </div>
+          </div>
+          <div className="row">
+            <p>{defaultTag[9]}</p>
+            <div className="drum-pad cell pause" id="pad-p">
+              <button
+                type="button"
+                name={this.state.keyList[9]}
+                value="9"
+                onClick={this.handleClick}
+              >
+                P
+              </button>
+              <audio
+                className="clip"
+                id={this.state.keyList[9]}
+                src={audioOut[8]}
+                // src={OpenHH}
+              />
+            </div>
+          </div>
         </div>
       </div>
     );
