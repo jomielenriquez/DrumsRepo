@@ -8,64 +8,85 @@ import Phone from "./WhoWantsToBe/PhoneAFriend.mp3"
 import Supense from  "./WhoWantsToBe/Suspense.mp3"
 import Win from "./WhoWantsToBe/Win.mp3"
 import Yey from "./WhoWantsToBe/Yey.mp3"
-import parse from 'html-react-parser'
-import React, { Suspense } from "react";
-var playing = 0;
-const Themes ={};
-const defaultAudio = [
-  "https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3",
-  "https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3",
-  "https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3",
-  "https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3",
-  "https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3",
-  "https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3",
-  "https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3",
-  "https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3",
-  "https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3"
-];
+import React, { Component } from "react";
+const Themes ={
+  default:{
+    taudio:[
+      "https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3",
+      "https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3",
+      "https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3",
+      "https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3",
+      "https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3",
+      "https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3",
+      "https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3",
+      "https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3",
+      "https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3"
+    ],
+    ttext:[
+      "Chord 1",
+      "Chord 2",
+      "Chord 3",
+      "Shaker",
+      "Open HH",
+      "Closed HH",
+      "Punchy Kick",
+      "Side Stick",
+      "Snare",
+      "Pause"
+    ],
+    ticon:[
+      "fa fa-light fa-guitar",
+      "fa fa-light fa-guitar",
+      "fa fa-light fa-guitar",
+      "fa fa-solid fa-cubes-stacked",
+      "fa fa-light fa-hands",
+      "fa fa-solid fa-hands",
+      "fa fa-solid fa-shoe-prints",
+      "fa fa-solid fa-drum",
+      "fa fa-solid fa-drum-steelpan",
+      "fa fa-solid fa-pause"
+    ]
+  },
+  WhoWants:{
+    taudio:[
+      Win1000,
+      BackGroundMusic,
+      FinalAns,
+      LetsPlay,
+      Lose,
+      Phone,
+      Supense,
+      Win,
+      Yey
+    ],
+    ttext:[
+      "WIN",
+      "Background",
+      "Final",
+      "Let's Play",
+      "Lose",
+      "Phone",
+      "Suspense",
+      "WIN",
+      "Yey Kids",
+      "Pause"
+    ],
+    ticon:[
+      "fa fa-solid fa-trophy",//<FontAwesomeIcon icon="fa-solid fa-volume-off" />
+      "fa fa-solid fa-volume-high",
+      "fa fa-solid fa-volume-off",
+      "fa fa-solid fa-play",
+      "fa fa-solid fa-heart-crack",
+      "fa fa-solid fa-phone-volume",
+      "fa fa-solid fa-triangle-exclamation",
+      "fa fa-solid fa-flag-checkered",
+      "fa fa-solid fa-child-reaching",
+      "fa fa-solid fa-pause"
+    ]
+  },
+  Themes:["default","WhoWants"]
 
-const defaultThemeTag =[
-  // "<i class='fa-solid fa-guitar fa'></i>",
-  "Chord 1",
-  "Chord 2",
-  "Chord 3",
-  "Shaker",
-  "Open HH",
-  "Closed HH",
-  "Punchy Kick",
-  "Side Stick",
-  "Snare",
-  // "<i class='fa-solid fa-pause fa'></i>"
-  "Pause"
-]
-
-const WhoWantsToBeList = [
-  Win1000,
-  BackGroundMusic,
-  FinalAns,
-  LetsPlay,
-  Lose,
-  Phone,
-  Supense,
-  Win,
-  Yey
-]
-
-const WhoWantsTag = [
-  "WIN",
-  "Background",
-  "Final",
-  "Let's Play",
-  "Lose",
-  "Phone",
-  "Suspense",
-  "WIN",
-  "Yey Kids",
-  "Pause"
-]
-
-var defaultTag =[]
-var audioOut = [];
+};
 
 export default class App extends React.Component {
   constructor(props) {
@@ -133,10 +154,10 @@ export default class App extends React.Component {
       var div1 = document.getElementById(KeyId);
       var Btn_Pressed = div1.getElementsByTagName("button")[0];
       var div = document.getElementById('display');
-      div.innerHTML = defaultTag[parseInt(Btn_Pressed.value)];
+      div.innerHTML = Themes[this.state.theme].ttext[parseInt(Btn_Pressed.value)];
     }
     catch(e){
-      div.innerHTML = defaultTag[btnClicked.value];
+      div.innerHTML = Themes[this.state.theme].ttext[btnClicked.value];
     }
     
   }
@@ -155,16 +176,7 @@ export default class App extends React.Component {
 
   render() {
     
-    if(this.state.theme=="default") {
-      defaultTag=defaultThemeTag;
-      audioOut=defaultAudio;
-      //document.body.style.backgroundImage='url("https://thumbs.dreamstime.com/b/modelo-de-mosaico-geom%C3%A9trico-del-tri%C3%A1ngulo-azul-35955837.jpg")';
-    }
-    else if(this.state.theme=="WhoWants") {
-      audioOut=WhoWantsToBeList;
-      defaultTag=WhoWantsTag
-      //document.body.style.backgroundImage='url("https://www.designbolts.com/wp-content/uploads/2014/04/ultra-violet-purple-seamless-background.png")';
-    }
+    const const_Themes = Themes.Themes.map(function(item,i){return <option value={item}>{item}</option>});
 
     return (
       <div id="drum-machine">
@@ -172,8 +184,7 @@ export default class App extends React.Component {
 
         <div id="select" className="divs">
           <select name="Theme" id="Theme_select" className="select_theme" onChange={this.changeTheme}>
-            <option value="default">Default</option>
-            <option value="WhoWants">Who wants to be a millionaire</option>
+            {const_Themes}
           </select>
         </div>
         <div id="div_volume" className="divs">
@@ -191,12 +202,12 @@ export default class App extends React.Component {
                 value="0"
                 onClick={this.handleClick}
               >
-                {parse(defaultTag[0])} <br/> (Q)
+                <i className={Themes[this.state.theme].ticon[0]}></i> <br/> (Q)
               </button>
               <audio
                 className="clip"
                 id={this.state.keyList[0]}
-                src={audioOut[0]}
+                src={Themes[this.state.theme].taudio[0]}
               />
             </div>
 
@@ -209,12 +220,12 @@ export default class App extends React.Component {
                 value="1"
                 onClick={this.handleClick}
               >
-                {parse(defaultTag[1])} <br/> (W)
+                <i className={Themes[this.state.theme].ticon[1]}></i> <br/> (W)
               </button>
               <audio
                 className="clip"
                 id={this.state.keyList[1]}
-                src={audioOut[1]}
+                src={Themes[this.state.theme].taudio[1]}
               />
             </div>
 
@@ -227,12 +238,12 @@ export default class App extends React.Component {
                 value="2"
                 onClick={this.handleClick}
               >
-                {parse(defaultTag[2])} <br/> (E)
+                <i className={Themes[this.state.theme].ticon[2]}></i> <br/> (E)
               </button>
               <audio
                 className="clip"
                 id={this.state.keyList[2]}
-                src={audioOut[2]}
+                src={Themes[this.state.theme].taudio[2]}
               />
             </div>
           </div>
@@ -247,12 +258,12 @@ export default class App extends React.Component {
                 value="3"
                 onClick={this.handleClick}
               >
-                {parse(defaultTag[3])} <br/> (A)
+                <i className={Themes[this.state.theme].ticon[3]}></i> <br/> (A)
               </button>
               <audio
                 className="clip"
                 id={this.state.keyList[3]}
-                src={audioOut[3]}
+                src={Themes[this.state.theme].taudio[3]}
               />
             </div>
 
@@ -265,12 +276,12 @@ export default class App extends React.Component {
                 value="4"
                 onClick={this.handleClick}
               >
-                {parse(defaultTag[4])} <br/> (S)
+                <i className={Themes[this.state.theme].ticon[4]}></i> <br/> (S)
               </button>
               <audio
                 className="clip"
                 id={this.state.keyList[4]}
-                src={audioOut[4]}
+                src={Themes[this.state.theme].taudio[4]}
               />
             </div>
 
@@ -283,12 +294,12 @@ export default class App extends React.Component {
                 value="5"
                 onClick={this.handleClick}
               >
-                {parse(defaultTag[5])} <br/> (D)
+                <i className={Themes[this.state.theme].ticon[5]}></i> <br/> (D)
               </button>
               <audio
                 className="clip"
                 id={this.state.keyList[5]}
-                src={audioOut[5]}
+                src={Themes[this.state.theme].taudio[5]}
               />
             </div>
           </div>
@@ -303,12 +314,12 @@ export default class App extends React.Component {
                 value="6"
                 onClick={this.handleClick}
               >
-                {parse(defaultTag[6])} <br/> (Z)
+                <i className={Themes[this.state.theme].ticon[6]}></i> <br/> (Z)
               </button>
               <audio
                 className="clip"
                 id={this.state.keyList[6]}
-                src={audioOut[6]}
+                src={Themes[this.state.theme].taudio[6]}
               />
             </div>
 
@@ -321,12 +332,12 @@ export default class App extends React.Component {
                 value="7"
                 onClick={this.handleClick}
               >
-                {parse(defaultTag[7])} <br/> (X)
+                <i className={Themes[this.state.theme].ticon[7]}></i> <br/> (X)
               </button>
               <audio
                 className="clip"
                 id={this.state.keyList[7]}
-                src={audioOut[7]}
+                src={Themes[this.state.theme].taudio[7]}
               />
             </div>
 
@@ -339,13 +350,12 @@ export default class App extends React.Component {
                 value="8"
                 onClick={this.handleClick}
               >
-                {parse(defaultTag[8])} <br/> (C)
+                <i className={Themes[this.state.theme].ticon[8]}></i> <br/> (C)
               </button>
               <audio
                 className="clip"
                 id={this.state.keyList[8]}
-                src={audioOut[8]}
-                // src={OpenHH}
+                src={Themes[this.state.theme].taudio[8]}
               />
             </div>
           </div>
@@ -359,13 +369,12 @@ export default class App extends React.Component {
                 value="9"
                 onClick={this.handleClick}
               >
-                {parse(defaultTag[9])} <br/> (P)
+                <i className={Themes[this.state.theme].ticon[9]}></i> <br/> (P)
               </button>
               <audio
                 className="clip"
                 id={this.state.keyList[9]}
-                src={audioOut[8]}
-                // src={OpenHH}
+                src={Themes[this.state.theme].taudio[0]}
               />
             </div>
           </div>

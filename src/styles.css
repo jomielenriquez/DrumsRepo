@@ -1,15 +1,14 @@
 :root{
   --container:400px;
+  --Neon:rgb(125, 174, 248);
+  --Backcolor: black;
+  --DisplayBC: var(--Neon);
+  --DisplayTC: var(--Backcolor);
 }
 
 .App {
   font-family: sans-serif;
   text-align: center;
-}
-body{
-  /* background-color: black; */
-  /* background-image: url("https://thumbs.dreamstime.com/b/modelo-de-mosaico-geom%C3%A9trico-del-tri%C3%A1ngulo-azul-35955837.jpg"); */
-  /* background-image: url("https://www.designbolts.com/wp-content/uploads/2014/04/ultra-violet-purple-seamless-background.png"); */
 }
 #drum-machine{
   display: block;
@@ -19,14 +18,20 @@ body{
   padding-bottom: 30px;
   border: 1px solid black;
   border-radius: 10px;
-  background-color: white;
+  background-color: var(--Backcolor);
   opacity: .8;
-  padding-top: 10px !important;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
 }
 .Creator{
   text-align: center;
-  margin: 10px auto 0 auto;
+  margin: 10px auto 0 auto !important;
   font-family: 'Orbitron', sans-serif !important;
+  font-size: 12px;
+  position: absolute;
+  width:400px;
+  transform: translateY(50px);
+  
 }
 body{
   background-color: gray;
@@ -50,8 +55,8 @@ body{
   border: solid 1px black;
   width:none !important;
   text-align: center;
-  background-color: black;
-  color:white;
+  background-color: var(--DisplayBC);
+  color:var(--DisplayTC);
   width: 280px;
 }
 .divs{
@@ -66,6 +71,10 @@ div.drum-pad button{
   height:90px !important;
   opacity: 1;
   top:0 !important;
+
+  border: 1px solid var(--Neon);
+  background-color: var(--Backcolor);
+  color: var(--Neon);
 }
 
 div.drum-pad{
@@ -94,4 +103,11 @@ div.drum-pad{
 }
 p{
   margin-bottom: 3px;
+}
+
+@media only screen and (max-device-width: 400px) {
+  #drum-machine{
+    width:380px !important;
+    margin:auto !important;
+  }
 }
