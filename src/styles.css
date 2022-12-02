@@ -2,6 +2,7 @@
   --container:400px;
   --Neon:rgb(125, 174, 248);
   --Backcolor: black;
+  --ActiveBC: rgb(24, 22, 22);
   --DisplayBC: var(--Neon);
   --DisplayTC: var(--Backcolor);
 }
@@ -76,6 +77,9 @@ div.drum-pad button{
   background-color: var(--Backcolor);
   color: var(--Neon);
 }
+div.drum-pad button:active, .btnActive{
+  background-color: var(--ActiveBC) !important;
+}
 
 div.drum-pad{
   margin:5px;
@@ -105,7 +109,7 @@ p{
   margin-bottom: 3px;
 }
 
-@media only screen and (max-device-width: 400px) {
+@media only screen and (max-device-width: 600px) {
   #drum-machine{
     width:380px !important;
     margin:auto !important;

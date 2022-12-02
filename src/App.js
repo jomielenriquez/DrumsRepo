@@ -87,7 +87,12 @@ const Themes ={
   Themes:["default","WhoWants"]
 
 };
-
+function setBtnActive(id){
+  document.getElementById(id).classList.add("btnActive");
+  setTimeout(function(){
+    document.getElementById(id).classList.remove("btnActive");
+  },500);
+}
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -119,9 +124,9 @@ export default class App extends React.Component {
     var btnClicked = event.target;
     if (arguments[0] === "keydown") {
       var audio = document.getElementById(arguments[1]);
+      setBtnActive("btn_" + arguments[1]);
     } else {
       this.setState({ keyPressed: "" });
-      console.log(event.target);
       if(btnClicked.value==undefined) btnClicked = event.target.parentElement;
 
       const { name, value } = btnClicked;
@@ -196,7 +201,7 @@ export default class App extends React.Component {
             <div className="drum-pad cell" id="pad-q">
               
               <button
-                id="btn_0"
+                id={"btn_" + this.state.keyList[0]}
                 type="button"
                 name={this.state.keyList[0]}
                 value="0"
@@ -214,7 +219,7 @@ export default class App extends React.Component {
             <div className="drum-pad cell" id="pad-w">
               
               <button
-                id="btn_1"
+                id={"btn_" + this.state.keyList[1]}
                 type="button"
                 name={this.state.keyList[1]}
                 value="1"
@@ -232,7 +237,7 @@ export default class App extends React.Component {
             <div className="drum-pad cell" id="pad-e">
               
               <button
-                id="btn_2"
+                id={"btn_" + this.state.keyList[2]}
                 type="button"
                 name={this.state.keyList[2]}
                 value="2"
@@ -252,7 +257,7 @@ export default class App extends React.Component {
             <div className="drum-pad cell" id="pad-a">
               
               <button
-                id="btn_3"
+                id={"btn_" + this.state.keyList[3]}
                 type="button"
                 name={this.state.keyList[3]}
                 value="3"
@@ -270,7 +275,7 @@ export default class App extends React.Component {
             <div className="drum-pad cell" id="pad-s">
               
               <button
-                id="btn_4"
+                id={"btn_" + this.state.keyList[4]}
                 type="button"
                 name={this.state.keyList[4]}
                 value="4"
@@ -288,7 +293,7 @@ export default class App extends React.Component {
             <div className="drum-pad cell" id="pad-d">
               
               <button
-                id="btn_5"
+                id={"btn_" + this.state.keyList[5]}
                 type="button"
                 name={this.state.keyList[5]}
                 value="5"
@@ -308,7 +313,7 @@ export default class App extends React.Component {
             <div className="drum-pad cell" id="pad-z">
               
               <button
-                id="btn_6"
+                id={"btn_" + this.state.keyList[6]}
                 type="button"
                 name={this.state.keyList[6]}
                 value="6"
@@ -326,7 +331,7 @@ export default class App extends React.Component {
             <div className="drum-pad cell" id="pad-x">
               
               <button
-                id="btn_7"
+                id={"btn_" + this.state.keyList[7]}
                 type="button"
                 name={this.state.keyList[7]}
                 value="7"
@@ -344,7 +349,7 @@ export default class App extends React.Component {
             <div className="drum-pad cell" id="pad-c">
               
               <button
-                id="btn_8"
+                id={"btn_" + this.state.keyList[8]}
                 type="button"
                 name={this.state.keyList[8]}
                 value="8"
@@ -363,7 +368,7 @@ export default class App extends React.Component {
             
             <div className="drum-pad cell pause" id="pad-p">
               <button
-                id="btn_9"
+                id={"btn_" + this.state.keyList[9]}
                 type="button"
                 name={this.state.keyList[9]}
                 value="9"
