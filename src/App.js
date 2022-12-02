@@ -8,8 +8,10 @@ import Phone from "./WhoWantsToBe/PhoneAFriend.mp3"
 import Supense from  "./WhoWantsToBe/Suspense.mp3"
 import Win from "./WhoWantsToBe/Win.mp3"
 import Yey from "./WhoWantsToBe/Yey.mp3"
+import parse from 'html-react-parser'
 import React, { Suspense } from "react";
 var playing = 0;
+const Themes ={};
 const defaultAudio = [
   "https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3",
   "https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3",
@@ -23,6 +25,7 @@ const defaultAudio = [
 ];
 
 const defaultThemeTag =[
+  // "<i class='fa-solid fa-guitar fa'></i>",
   "Chord 1",
   "Chord 2",
   "Chord 3",
@@ -32,6 +35,7 @@ const defaultThemeTag =[
   "Punchy Kick",
   "Side Stick",
   "Snare",
+  // "<i class='fa-solid fa-pause fa'></i>"
   "Pause"
 ]
 
@@ -49,11 +53,11 @@ const WhoWantsToBeList = [
 
 const WhoWantsTag = [
   "WIN",
-  "Background Music",
-  "Final Answer",
+  "Background",
+  "Final",
   "Let's Play",
   "Lose",
-  "Phone a Friend",
+  "Phone",
   "Suspense",
   "WIN",
   "Yey Kids",
@@ -91,22 +95,28 @@ export default class App extends React.Component {
   }
 
   handleClick(event) {
-    console.log(event.target)
+    var btnClicked = event.target;
     if (arguments[0] === "keydown") {
       var audio = document.getElementById(arguments[1]);
     } else {
       this.setState({ keyPressed: "" });
-      const { name, value } = event.target;
+      console.log(event.target);
+      if(btnClicked.value==undefined) btnClicked = event.target.parentElement;
+
+      const { name, value } = btnClicked;
       this.setState({
         displayValue: value
       });
       var audio = document.getElementById(name);
     }
-    audio.volume = document.getElementById("mixerVolume").value/100;
-    audio.paused ? audio.play() : (audio.currentTime = 0);
+    try{
+      audio.volume = document.getElementById("mixerVolume").value/100;
+      audio.paused ? audio.play() : (audio.currentTime = 0);
+    }
+    catch(e){}
 
     try{
-      if(arguments[1]=="P" || event.target.value=="9"){
+      if(arguments[1]=="P" || btnClicked.value=="9"){
         const elements = document.querySelectorAll('audio');
   
         elements.forEach( el => {
@@ -126,7 +136,7 @@ export default class App extends React.Component {
       div.innerHTML = defaultTag[parseInt(Btn_Pressed.value)];
     }
     catch(e){
-      div.innerHTML = event.target.value;
+      div.innerHTML = defaultTag[btnClicked.value];
     }
     
   }
@@ -148,17 +158,17 @@ export default class App extends React.Component {
     if(this.state.theme=="default") {
       defaultTag=defaultThemeTag;
       audioOut=defaultAudio;
-      document.body.style.backgroundImage='url("https://thumbs.dreamstime.com/b/modelo-de-mosaico-geom%C3%A9trico-del-tri%C3%A1ngulo-azul-35955837.jpg")';
+      //document.body.style.backgroundImage='url("https://thumbs.dreamstime.com/b/modelo-de-mosaico-geom%C3%A9trico-del-tri%C3%A1ngulo-azul-35955837.jpg")';
     }
     else if(this.state.theme=="WhoWants") {
       audioOut=WhoWantsToBeList;
       defaultTag=WhoWantsTag
-      document.body.style.backgroundImage='url("https://www.designbolts.com/wp-content/uploads/2014/04/ultra-violet-purple-seamless-background.png")';
+      //document.body.style.backgroundImage='url("https://www.designbolts.com/wp-content/uploads/2014/04/ultra-violet-purple-seamless-background.png")';
     }
 
     return (
       <div id="drum-machine">
-        <div id="display" className="divs">{defaultTag[playing]}</div>
+        <div id="display" className="display">Default Theme</div>
 
         <div id="select" className="divs">
           <select name="Theme" id="Theme_select" className="select_theme" onChange={this.changeTheme}>
@@ -173,14 +183,15 @@ export default class App extends React.Component {
         <div className="buttons table">
           <div className="row">
             <div className="drum-pad cell" id="pad-q">
-              <p>{defaultTag[0]}</p>
+              
               <button
+                id="btn_0"
                 type="button"
                 name={this.state.keyList[0]}
                 value="0"
                 onClick={this.handleClick}
               >
-                Q
+                {parse(defaultTag[0])} <br/> (Q)
               </button>
               <audio
                 className="clip"
@@ -190,14 +201,15 @@ export default class App extends React.Component {
             </div>
 
             <div className="drum-pad cell" id="pad-w">
-              <p>{defaultTag[1]}</p>
+              
               <button
+                id="btn_1"
                 type="button"
                 name={this.state.keyList[1]}
                 value="1"
                 onClick={this.handleClick}
               >
-                W
+                {parse(defaultTag[1])} <br/> (W)
               </button>
               <audio
                 className="clip"
@@ -207,14 +219,15 @@ export default class App extends React.Component {
             </div>
 
             <div className="drum-pad cell" id="pad-e">
-              <p>{defaultTag[2]}</p>
+              
               <button
+                id="btn_2"
                 type="button"
                 name={this.state.keyList[2]}
                 value="2"
                 onClick={this.handleClick}
               >
-                E
+                {parse(defaultTag[2])} <br/> (E)
               </button>
               <audio
                 className="clip"
@@ -226,14 +239,15 @@ export default class App extends React.Component {
 
           <div className="row">
             <div className="drum-pad cell" id="pad-a">
-              <p>{defaultTag[3]}</p>
+              
               <button
+                id="btn_3"
                 type="button"
                 name={this.state.keyList[3]}
                 value="3"
                 onClick={this.handleClick}
               >
-                A
+                {parse(defaultTag[3])} <br/> (A)
               </button>
               <audio
                 className="clip"
@@ -243,14 +257,15 @@ export default class App extends React.Component {
             </div>
 
             <div className="drum-pad cell" id="pad-s">
-              <p>{defaultTag[4]}</p>
+              
               <button
+                id="btn_4"
                 type="button"
                 name={this.state.keyList[4]}
                 value="4"
                 onClick={this.handleClick}
               >
-                S
+                {parse(defaultTag[4])} <br/> (S)
               </button>
               <audio
                 className="clip"
@@ -260,14 +275,15 @@ export default class App extends React.Component {
             </div>
 
             <div className="drum-pad cell" id="pad-d">
-              <p>{defaultTag[5]}</p>
+              
               <button
+                id="btn_5"
                 type="button"
                 name={this.state.keyList[5]}
                 value="5"
                 onClick={this.handleClick}
               >
-                D
+                {parse(defaultTag[5])} <br/> (D)
               </button>
               <audio
                 className="clip"
@@ -279,14 +295,15 @@ export default class App extends React.Component {
 
           <div className="row">
             <div className="drum-pad cell" id="pad-z">
-              <p>{defaultTag[6]}</p>
+              
               <button
+                id="btn_6"
                 type="button"
                 name={this.state.keyList[6]}
                 value="6"
                 onClick={this.handleClick}
               >
-                Z
+                {parse(defaultTag[6])} <br/> (Z)
               </button>
               <audio
                 className="clip"
@@ -296,14 +313,15 @@ export default class App extends React.Component {
             </div>
 
             <div className="drum-pad cell" id="pad-x">
-              <p>{defaultTag[7]}</p>
+              
               <button
+                id="btn_7"
                 type="button"
                 name={this.state.keyList[7]}
                 value="7"
                 onClick={this.handleClick}
               >
-                X
+                {parse(defaultTag[7])} <br/> (X)
               </button>
               <audio
                 className="clip"
@@ -313,14 +331,15 @@ export default class App extends React.Component {
             </div>
 
             <div className="drum-pad cell" id="pad-c">
-              <p>{defaultTag[8]}</p>
+              
               <button
+                id="btn_8"
                 type="button"
                 name={this.state.keyList[8]}
                 value="8"
                 onClick={this.handleClick}
               >
-                C
+                {parse(defaultTag[8])} <br/> (C)
               </button>
               <audio
                 className="clip"
@@ -331,15 +350,16 @@ export default class App extends React.Component {
             </div>
           </div>
           <div className="row">
-            <p>{defaultTag[9]}</p>
+            
             <div className="drum-pad cell pause" id="pad-p">
               <button
+                id="btn_9"
                 type="button"
                 name={this.state.keyList[9]}
                 value="9"
                 onClick={this.handleClick}
               >
-                P
+                {parse(defaultTag[9])} <br/> (P)
               </button>
               <audio
                 className="clip"
@@ -349,6 +369,9 @@ export default class App extends React.Component {
               />
             </div>
           </div>
+        </div>
+        <div className="Creator">
+          Created By Jomiel Enriquez
         </div>
       </div>
     );

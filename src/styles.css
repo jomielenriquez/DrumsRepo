@@ -21,20 +21,56 @@ body{
   border-radius: 10px;
   background-color: white;
   opacity: .8;
+  padding-top: 10px !important;
+}
+.Creator{
+  text-align: center;
+  margin: 10px auto 0 auto;
+  font-family: 'Orbitron', sans-serif !important;
+}
+body{
+  background-color: gray;
+}
+.fa{
+  font-size:35px;
+  margin-bottom: 5px;
+}
+#root{
+  display: flex;
+  align-items: center;
+  height: 95vh;
+}
+.Volume{
+  width: 280px;
+}
+.display{
+  font-family: 'Orbitron', sans-serif !important;
+  margin-left: auto;
+  margin-right: auto;
+  border: solid 1px black;
+  width:none !important;
+  text-align: center;
+  background-color: black;
+  color:white;
+  width: 280px;
 }
 .divs{
   width:var(--container) !important;
   text-align: center;
+  margin-top: 5px;
 }
 div.drum-pad button{
-  width:40px;
-  height:40px;
+  margin:0 !important;
+  padding: 0 !important;
+  width:90px !important;
+  height:90px !important;
   opacity: 1;
+  top:0 !important;
 }
 
 div.drum-pad{
   margin:5px;
-  width:90px;
+  /* width:90px; */
 }
 .table {
   display:block; 
@@ -44,6 +80,7 @@ div.drum-pad{
   text-align: center;
   display:block;
   width:var(--container) !important;
+  padding-top: 0 !important;
 }
 .cell {
   display:inline-block;
