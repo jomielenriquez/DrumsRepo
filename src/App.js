@@ -9,7 +9,7 @@ import Supense from  "./WhoWantsToBe/Suspense.mp3"
 import Win from "./WhoWantsToBe/Win.mp3"
 import Yey from "./WhoWantsToBe/Yey.mp3"
 import parse from 'html-react-parser'
-import React, { Suspense } from "react";
+import React, { Component } from "react";
 var playing = 0;
 const Themes ={};
 const defaultAudio = [
