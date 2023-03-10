@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/react-gh-pages/static/css/main.8dfc65e8.css",
+    "main.js": "/react-gh-pages/static/js/main.90247a36.js",
+    "static/media/BackGroundMusic.mp3": "/react-gh-pages/static/media/BackGroundMusic.26fe7cdf8dad6dcbd9e4.mp3",
+    "static/media/Suspense.mp3": "/react-gh-pages/static/media/Suspense.9d981b5ffb1138508718.mp3",
+    "static/media/PhoneAFriend.mp3": "/react-gh-pages/static/media/PhoneAFriend.b977e6714fb2071edbd7.mp3",
+    "static/media/Win.mp3": "/react-gh-pages/static/media/Win.5d23612660b721d1b2d7.mp3",
+    "static/media/FinalAns.mp3": "/react-gh-pages/static/media/FinalAns.6f77b43fe91fbdb20536.mp3",
+    "static/media/LetsPlay.mp3": "/react-gh-pages/static/media/LetsPlay.e45fced2cecbdf825e40.mp3",
+    "static/media/Yey.mp3": "/react-gh-pages/static/media/Yey.9acb261e0b8b47e357ab.mp3",
+    "static/media/$1,000 Win.mp3": "/react-gh-pages/static/media/$1,000 Win.c30e55f4219139590868.mp3",
+    "static/media/Lose.mp3": "/react-gh-pages/static/media/Lose.ad64959b17fdc110ff73.mp3",
+    "index.html": "/react-gh-pages/index.html",
+    "main.8dfc65e8.css.map": "/react-gh-pages/static/css/main.8dfc65e8.css.map",
+    "main.90247a36.js.map": "/react-gh-pages/static/js/main.90247a36.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8dfc65e8.css",
+    "static/js/main.90247a36.js"
+  ]
+}
