@@ -20,3 +20,16 @@ cd <name of the project. ex. drum>
 # start the project
 npm start
 ```
+
+## Deploying React app to GitHub
+
+Link : https://github.com/gitname/react-gh-pages
+
+### Run code below to deploy changes to GitHub
+```python
+# change directory to the app
+cd drum
+
+# run deployment
+npm run deploy
+```
